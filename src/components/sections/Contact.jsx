@@ -8,7 +8,7 @@ export default function Contact() {
   const headerRef = useScrollReveal()
 
   return (
-    <section id="contact" className="py-24 px-6 md:px-10 max-w-[1100px] mx-auto relative z-10">
+    <section id="contact" className="py-16 md:py-24 px-5 md:px-10 max-w-[1100px] mx-auto relative z-10">
       <div 
         ref={headerRef} 
         className="mb-16 text-center"
@@ -16,7 +16,7 @@ export default function Contact() {
         <span style={{ fontFamily: "'JetBrains Mono', monospace", color: '#00d4ff', fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
           // Get In Touch
         </span>
-        <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900, fontSize: '3rem', color: '#ffffff', marginTop: '0.5rem' }}>
+        <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900, fontSize: 'clamp(1.6rem, 5vw, 2.5rem)', color: '#ffffff', marginTop: '0.5rem', marginBottom: '2rem' }}>
           Let's Build <span style={{ color: 'transparent', WebkitTextFillColor: 'transparent', background: 'linear-gradient(135deg, #00d4ff, #a78bfa)', backgroundClip: 'text', WebkitBackgroundClip: 'text' }}>Something</span> Intelligent
         </h2>
       </div>
@@ -55,7 +55,7 @@ export default function Contact() {
               style={{
                 backgroundColor: 'rgba(8,8,8,0.9)',
                 border: '0.5px solid rgba(255,255,255,0.06)',
-                padding: '1rem 1.2rem',
+                padding: '0.85rem 1rem',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(0,212,255,0.2)' }}
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)' }}
@@ -65,7 +65,7 @@ export default function Contact() {
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.6rem', color: '#3f3f46', textTransform: 'uppercase' }}>
                   Email
                 </div>
-                <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.85rem', color: '#a1a1aa' }}>
+                <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.78rem', color: '#a1a1aa', wordBreak: 'break-all' }}>
                   {person.email}
                 </div>
               </div>
@@ -90,7 +90,7 @@ export default function Contact() {
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.6rem', color: '#3f3f46', textTransform: 'uppercase' }}>
                   LinkedIn
                 </div>
-                <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.85rem', color: '#a1a1aa' }}>
+                <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.78rem', color: '#a1a1aa', wordBreak: 'break-all' }}>
                   {person.name}
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function Contact() {
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.6rem', color: '#3f3f46', textTransform: 'uppercase' }}>
                   GitHub
                 </div>
-                <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.85rem', color: '#a1a1aa' }}>
+                <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.78rem', color: '#a1a1aa', wordBreak: 'break-all' }}>
                   AakashSharma011
                 </div>
               </div>
@@ -143,7 +143,7 @@ export default function Contact() {
             />
 
             <div 
-              className="flex-1 rounded-2xl flex flex-col items-center justify-center text-center p-8 z-10"
+              className="flex-1 rounded-2xl flex flex-col items-center justify-center text-center p-6 md:p-8 z-10"
               style={{ backgroundColor: 'rgba(8,8,8,0.97)' }}
             >
               <div 
@@ -199,9 +199,12 @@ export default function Contact() {
                   background: 'linear-gradient(135deg, #00d4ff, #a78bfa)',
                   color: '#000',
                   fontWeight: 700,
-                  padding: '0.9rem 2rem',
+                  padding: '0.8rem 1.8rem',
                   clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)',
-                  fontFamily: "'Space Grotesk', sans-serif"
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  width: '100%',
+                  justifyContent: 'center',
+                  fontSize: '0.85rem'
                 }}
               >
                 <Download size={18} /> Download Resume

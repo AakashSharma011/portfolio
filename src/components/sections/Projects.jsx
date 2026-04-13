@@ -15,6 +15,9 @@ function ProjectCard({ project, featured = false, index }) {
     const w = rect.width
     const h = rect.height
 
+    // Disable 3D tilt on touch devices
+    if ('ontouchstart' in window) return
+    
     const rx = -((y - h / 2) / h) * 12
     const ry = ((x - w / 2) / w) * 12
 
@@ -32,7 +35,7 @@ function ProjectCard({ project, featured = false, index }) {
     <div
       ref={cardRef}
       className={`project-card rounded-xl p-6 md:p-8 flex flex-col justify-between ${
-        featured ? 'md:col-span-2' : ''
+        featured ? 'lg:col-span-2' : ''
       }`}
       style={{
         backgroundColor: 'rgba(8,8,8,0.9)',
@@ -40,13 +43,13 @@ function ProjectCard({ project, featured = false, index }) {
         backdropFilter: 'blur(12px)',
         transition: 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s',
         borderColor: featured ? 'rgba(0,212,255,0.15)' : 'rgba(255,255,255,0.06)',
-        minHeight: featured ? '450px' : '380px',
+        minHeight: featured ? 'auto' : '380px',
         transitionDelay: `${index * 0.1}s`,
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="relative z-10 flex flex-col h-full">
+      <div className={`relative z-10 flex flex-col h-full ${featured ? 'lg:block' : ''}`}>
         <div className="flex flex-wrapjustify-between items-start mb-6 gap-4">
           <div>
             <div className="flex items-center gap-3 mb-3">
@@ -81,10 +84,10 @@ function ProjectCard({ project, featured = false, index }) {
                 {project.tag}
               </span>
             </div>
-            <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: '1.75rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.5rem' }}>
+            <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: '1.3rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.5rem' }}>
               {project.name}
             </h3>
-            <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.9rem', color: '#a1a1aa', lineHeight: 1.6, maxWidth: '500px' }}>
+            <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.84rem', color: '#a1a1aa', lineHeight: 1.6, maxWidth: '500px' }}>
               {project.description}
             </p>
           </div>
@@ -120,13 +123,13 @@ function ProjectCard({ project, featured = false, index }) {
         </div>
 
         <div className="mt-auto flex flex-col md:flex-row gap-6 md:items-end justify-between">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mt-4 md:mt-0">
             {project.stack.map((tech) => (
               <span
                 key={tech}
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: '0.62rem',
+                  fontSize: '0.58rem',
                   color: '#a1a1aa',
                   border: '0.5px solid rgba(255,255,255,0.07)',
                   background: 'rgba(255,255,255,0.02)',
@@ -141,7 +144,7 @@ function ProjectCard({ project, featured = false, index }) {
 
           {featured && project.metrics && (
             <div
-              className="grid grid-cols-2 gap-4 p-4 rounded-lg self-stretch md:self-auto min-w-[240px]"
+              className="grid grid-cols-2 gap-4 p-4 rounded-lg self-stretch lg:self-auto min-w-[200px] mt-6 lg:mt-0"
               style={{
                 background: 'rgba(0,212,255,0.03)',
                 border: '0.5px solid rgba(0,212,255,0.1)',
@@ -174,7 +177,7 @@ export default function Projects() {
   const headerRef = useScrollReveal()
 
   return (
-    <section id="projects" className="py-24 px-6 md:px-10 max-w-[1100px] mx-auto relative z-10">
+    <section id="projects" className="py-16 md:py-24 px-5 md:px-10 max-w-[1100px] mx-auto relative z-10">
       <div 
         ref={headerRef} 
         className="mb-12"
@@ -182,12 +185,12 @@ export default function Projects() {
         <span style={{ fontFamily: "'JetBrains Mono', monospace", color: '#00d4ff', fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
           // Selected Work
         </span>
-        <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900, fontSize: '3rem', color: '#ffffff', marginTop: '0.5rem' }}>
+        <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900, fontSize: 'clamp(1.8rem, 6vw, 3rem)', color: '#ffffff', marginTop: '0.5rem', marginBottom: '2rem' }}>
           Projects
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
         {projects.map((project, index) => (
           <ProjectCard 
             key={project.name} 

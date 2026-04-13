@@ -83,9 +83,18 @@ export default function ParticleField() {
     function frame() {
       ctx.clearRect(0, 0, W, H)
 
-      const len = particles.length
+      const isMobile = W < 768
+      const mobileParticleCount = 60
+      const currentParticleCount = isMobile ? mobileParticleCount : PARTICLE_COUNT
 
-      for (let i = 0; i < len; i++) {
+      // If particle count changed (e.g. on resize), we could handle it, 
+      // but for simplicity we'll just use the initial or current count if we re-init.
+      // However, the requested fix is to reduce particles. 
+      // I'll adjust the loop to only process the first 'currentParticleCount' particles.
+
+      const activeLen = Math.min(len, currentParticleCount)
+
+      for (let i = 0; i < activeLen; i++) {
         const p = particles[i]
 
         const dmx = p.x - mouse.x
@@ -97,7 +106,7 @@ export default function ParticleField() {
           p.vy += (dmy / dMouse) * force * 0.1
         }
 
-        for (let j = i + 1; j < len; j++) {
+        for (let j = i + 1; j < activeLen; j++) {
           const q = particles[j]
           const dx = q.x - p.x
           const dy = q.y - p.y
@@ -152,32 +161,36 @@ export default function ParticleField() {
         if (p.y + p.r > H) { p.vy = -Math.abs(p.vy); p.y = H - p.r }
       }
 
-      ctx.lineWidth = 0.35
-      for (let i = 0; i < len; i++) {
-        const p = particles[i]
-        for (let j = i + 1; j < len; j++) {
-          const q = particles[j]
-          const dx = p.x - q.x
-          const dy = p.y - q.y
-          const distSq = dx * dx + dy * dy
-          if (distSq < CONNECT_DIST_SQ) {
-            const lineAlpha = (1 - distSq / CONNECT_DIST_SQ) * 0.07
-            ctx.strokeStyle = `rgba(0,212,255,${lineAlpha})`
-            ctx.beginPath()
-            ctx.moveTo(p.x, p.y)
-            ctx.lineTo(q.x, q.y)
-            ctx.stroke()
+      // Skip lines on mobile
+      if (!isMobile) {
+        ctx.lineWidth = 0.35
+        for (let i = 0; i < activeLen; i++) {
+          const p = particles[i]
+          for (let j = i + 1; j < activeLen; j++) {
+            const q = particles[j]
+            const dx = p.x - q.x
+            const dy = p.y - q.y
+            const distSq = dx * dx + dy * dy
+            if (distSq < CONNECT_DIST_SQ) {
+              const lineAlpha = (1 - distSq / CONNECT_DIST_SQ) * 0.07
+              ctx.strokeStyle = `rgba(0,212,255,${lineAlpha})`
+              ctx.beginPath()
+              ctx.moveTo(p.x, p.y)
+              ctx.lineTo(q.x, q.y)
+              ctx.stroke()
+            }
           }
         }
       }
 
-      for (let i = 0; i < len; i++) {
+      for (let i = 0; i < activeLen; i++) {
         const p = particles[i]
         const finalAlpha = Math.max(0.05, Math.min(1, p.alpha + Math.sin(p.pulsePhase) * 0.25))
         p.pulsePhase += p.pulseSpeed
 
         ctx.save()
-        ctx.shadowBlur = p.r * 6
+        // Reduce shadowBlur on mobile
+        ctx.shadowBlur = isMobile ? p.r * 2 : p.r * 6
         ctx.shadowColor = p.col + '0.9)'
         ctx.fillStyle = p.col + finalAlpha + ')'
         ctx.beginPath()
@@ -185,6 +198,7 @@ export default function ParticleField() {
         ctx.fill()
         ctx.restore()
       }
+
 
       rafId = requestAnimationFrame(frame)
     }

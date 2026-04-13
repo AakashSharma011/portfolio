@@ -10,7 +10,7 @@ export default function About() {
   const terminalRef = useScrollReveal()
 
   return (
-    <section id="about" className="py-24 px-6 md:px-10 max-w-[1100px] mx-auto relative z-10">
+    <section id="about" className="py-16 md:py-24 px-5 md:px-10 max-w-[1100px] mx-auto relative z-10">
       <div 
         ref={headerRef} 
         className="mb-12"
@@ -18,17 +18,17 @@ export default function About() {
         <span style={{ fontFamily: "'JetBrains Mono', monospace", color: '#00d4ff', fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
           // About
         </span>
-        <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900, fontSize: '3rem', color: '#ffffff', marginTop: '0.5rem' }}>
+        <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900, fontSize: 'clamp(1.8rem, 6vw, 3rem)', color: '#ffffff', marginTop: '0.5rem', marginBottom: '2rem' }}>
           Background
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
         <div>
           <div 
             ref={bioRef} 
             className="mb-12"
-            style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.98rem', color: '#a1a1aa', lineHeight: 1.95 }}
+            style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.92rem', color: '#a1a1aa', lineHeight: 1.95 }}
           >
             I'm a <span style={{ color: '#ffffff', fontWeight: 600 }}>GenAI Engineer</span> and recent B.Tech Rank-1 graduate,
             passionate about turning state-of-the-art LLMs into robust, production-ready systems.
@@ -42,7 +42,7 @@ export default function About() {
 
           <div 
             ref={timelineRef} 
-            className="relative pl-6"
+            className="relative pl-5"
           >
             {/* Timeline Line */}
             <div 
@@ -66,9 +66,9 @@ export default function About() {
                 <h3 style={{ color: '#ffffff', fontWeight: 600, fontSize: '1.05rem', marginBottom: '0.2rem' }}>
                   {exp.role}
                 </h3>
-                <div className="flex items-center gap-3 mb-2" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                  <span style={{ color: '#00d4ff', fontSize: '0.72rem' }}>{exp.company}</span>
-                  <span style={{ color: '#3f3f46', fontSize: '0.65rem' }}>{exp.duration}</span>
+                <div className="flex flex-wrap items-center gap-2 mb-2" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  <span style={{ color: '#00d4ff', fontSize: '0.85rem' }}>{exp.company}</span>
+                  <span style={{ color: '#3f3f46', fontSize: '0.68rem' }}>{exp.duration}</span>
                 </div>
                 <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.85rem', color: '#a1a1aa', lineHeight: 1.6 }}>
                   {exp.description}
@@ -80,15 +80,15 @@ export default function About() {
 
         <div 
           ref={terminalRef} 
-          className="lg:mt-8"
+          className="lg:mt-8 w-full"
         >
           <div 
-            className="rounded-lg overflow-hidden flex flex-col"
+            className="rounded-lg overflow-hidden flex flex-col w-full"
             style={{
               backgroundColor: '#080808',
               border: '0.5px solid rgba(0,212,255,0.18)',
               boxShadow: '0 0 0 1px rgba(0,0,0,1), 0 30px 80px rgba(0,0,0,0.8), inset 0 0 30px rgba(0,212,255,0.02)',
-              minHeight: '400px',
+              minHeight: 'auto',
             }}
           >
             {/* Terminal Header */}
@@ -117,8 +117,9 @@ export default function About() {
               className="p-[1.5rem] flex-1"
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '0.8rem',
-                lineHeight: 2.1,
+                fontSize: '0.72rem',
+                lineHeight: 1.8,
+                wordBreak: 'break-all',
               }}
             >
               <Terminal 

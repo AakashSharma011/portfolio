@@ -105,47 +105,62 @@ export default function Navbar() {
           </motion.a>
         </div>
 
+        {/* Hamburger Menu Icon */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden relative z-[210] flex flex-col justify-between w-[22px] h-[16px] cursor-pointer"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
+          style={{ cursor: 'pointer' }}
         >
           <span
-            className={`block w-5 h-[1px] bg-[#00d4ff] transition-transform duration-300 ${
-              mobileOpen ? 'rotate-45 translate-y-[3.5px]' : ''
+            className={`block w-[22px] h-[2px] bg-white transition-all duration-300 ${
+              mobileOpen ? 'rotate-45 translate-y-[7px]' : ''
             }`}
           />
           <span
-            className={`block w-5 h-[1px] bg-[#00d4ff] transition-opacity duration-300 ${
+            className={`block w-[22px] h-[2px] bg-white transition-all duration-300 ${
               mobileOpen ? 'opacity-0' : ''
             }`}
           />
           <span
-            className={`block w-5 h-[1px] bg-[#00d4ff] transition-transform duration-300 ${
-              mobileOpen ? '-rotate-45 -translate-y-[3.5px]' : ''
+            className={`block w-[22px] h-[2px] bg-white transition-all duration-300 ${
+              mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''
             }`}
           />
         </button>
       </div>
 
+      {/* Full-screen Mobile Menu Overlay */}
       {mobileOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="md:hidden py-6 px-4 border-t"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           style={{
-            borderColor: 'rgba(255,255,255,0.06)',
-            backgroundColor: 'rgba(0,0,0,0.95)',
-            backdropFilter: 'blur(28px)',
+            position: 'fixed',
+            inset: 0,
+            zIndex: 200,
+            background: 'rgba(0,0,0,0.97)',
+            backdropFilter: 'blur(20px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <div className="flex flex-col gap-4">
+          {/* Close Button X (integrated with the hamburger above, but I'll ensure it's visible) */}
+          
+          <div className="flex flex-col items-center gap-[2rem]">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="font-mono text-[0.75rem] uppercase tracking-[0.15em] text-[#a1a1aa] hover:text-[#00d4ff] transition-colors"
+                style={{
+                  fontFamily: "'Syne', sans-serif",
+                  fontSize: '2rem',
+                  fontWeight: 800,
+                  color: 'white',
+                  textTransform: 'uppercase',
+                }}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -153,7 +168,13 @@ export default function Navbar() {
             ))}
             <a
               href="#contact"
-              className="text-[#00d4ff] font-mono text-[0.75rem] uppercase"
+              style={{
+                fontFamily: "'Syne', sans-serif",
+                fontSize: '2rem',
+                fontWeight: 800,
+                color: '#00d4ff',
+                textTransform: 'uppercase',
+              }}
               onClick={() => setMobileOpen(false)}
             >
               Hire Me
@@ -161,6 +182,7 @@ export default function Navbar() {
           </div>
         </motion.div>
       )}
+
     </motion.nav>
   )
 }

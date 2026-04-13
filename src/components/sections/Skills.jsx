@@ -27,8 +27,8 @@ function SkillTag({ name, hot, variant }) {
         whileHover={{ scale: 1.06 }}
         style={{
           fontFamily: "'Space Grotesk', sans-serif",
-          fontSize: '0.78rem',
-          padding: '0.3rem 0.75rem',
+          fontSize: '0.74rem',
+          padding: '0.25rem 0.6rem',
           borderRadius: '4px',
           border: `0.5px solid ${border}`,
           color: color,
@@ -48,10 +48,9 @@ function SkillTag({ name, hot, variant }) {
       className="skill-tag"
       style={{
         fontFamily: "'Space Grotesk', sans-serif",
-        fontSize: '0.78rem',
-        color: '#a1a1aa',
+        fontSize: '0.74rem',
         border: '0.5px solid rgba(255,255,255,0.07)',
-        padding: '0.3rem 0.75rem',
+        padding: '0.25rem 0.6rem',
         backgroundColor: 'transparent',
         borderRadius: '4px',
         display: 'inline-block',
@@ -84,7 +83,7 @@ function SkillGroup({ group, index }) {
   return (
     <div
       ref={cardRef}
-      className="p-6 md:p-8 rounded-xl"
+      className="p-5 md:p-8 rounded-xl"
       style={{
         backgroundColor: 'rgba(8,8,8,0.9)',
         border: '0.5px solid rgba(255,255,255,0.06)',
@@ -133,7 +132,7 @@ export default function Skills() {
   const headerRef = useScrollReveal()
 
   return (
-    <section id="skills" className="py-24 px-6 md:px-10 max-w-[1100px] mx-auto relative z-10">
+    <section id="skills" className="py-16 md:py-24 px-5 md:px-10 max-w-[1100px] mx-auto relative z-10">
       <div 
         ref={headerRef} 
         className="mb-12"
@@ -141,12 +140,12 @@ export default function Skills() {
         <span style={{ fontFamily: "'JetBrains Mono', monospace", color: '#00d4ff', fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
           // Technical Arsenal
         </span>
-        <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900, fontSize: '3rem', color: '#ffffff', marginTop: '0.5rem' }}>
+        <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900, fontSize: 'clamp(1.8rem, 6vw, 3rem)', color: '#ffffff', marginTop: '0.5rem', marginBottom: '2rem' }}>
           Skills
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
         {skills.map((group, index) => (
           <SkillGroup key={group.group} group={group} index={index} />
         ))}
