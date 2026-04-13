@@ -87,10 +87,11 @@ export default function Hero() {
           style={{
             fontFamily: "'Syne', sans-serif",
             fontWeight: 900,
-            fontSize: 'clamp(2rem, 8vw, 5.2rem)',
-            whiteSpace: 'normal',
+            fontSize: 'clamp(1.8rem, 7.6vw, 5.2rem)',
+            whiteSpace: 'nowrap',
             lineHeight: 1.1,
             marginBottom: '0.8rem',
+            color: '#ffffff',
           }}
         >
           {person.name}

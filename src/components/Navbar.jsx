@@ -145,18 +145,20 @@ export default function Navbar() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            overflowY: 'auto',
+            padding: '2rem 1rem',
           }}
         >
           {/* Close Button X (integrated with the hamburger above, but I'll ensure it's visible) */}
           
-          <div className="flex flex-col items-center gap-[2rem]">
+          <div className="flex flex-col items-center gap-[1.5rem] py-8">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 style={{
                   fontFamily: "'Syne', sans-serif",
-                  fontSize: '2rem',
+                  fontSize: 'clamp(1.5rem, 8vw, 2.2rem)',
                   fontWeight: 800,
                   color: 'white',
                   textTransform: 'uppercase',
@@ -170,7 +172,7 @@ export default function Navbar() {
               href="#contact"
               style={{
                 fontFamily: "'Syne', sans-serif",
-                fontSize: '2rem',
+                fontSize: 'clamp(1.5rem, 8vw, 2.2rem)',
                 fontWeight: 800,
                 color: '#00d4ff',
                 textTransform: 'uppercase',
